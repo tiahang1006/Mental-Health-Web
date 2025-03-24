@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mental Health Counselor Assistant</title>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+  <!-- External Styles -->
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="app.js"></script>
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- Header -->
+    <header class="header">
+      <h1>Mental Health Counselor Assistant</h1>
+      <!-- Uses nav-tabs to switch between views -->
+      <nav class="nav-tabs">
+        <button id="tab-helper" class="tab active" onclick="showScreen('helper')">Advice</button>
+        <button id="tab-search" class="tab" onclick="showScreen('search')">Search</button>
+      </nav>      
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <!-- Screen 1: Advice screen with ML model for GPT response -->
+      <section id="screen-helper" class="screen active">
+        <div class="container">
+          <form id="form">
+            <label for="input">Patient's Issue</label>
+            <textarea id="input" placeholder="E.g., The patient often feels overwhelmed and worthless, and..." required></textarea>
+            <button type="submit">Get Suggestion</button>
+          </form>
+          <p id="loading" class="loading" style="display: none;"></p>
+          <div id="responseBox" class="response-box" style="display: none;">
+            <p id="result"></p>
+            <button id="copyBtn" class="copy-btn">Make a Copy</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Screen 2: Search screen for semantic similarity results -->
+      <section id="screen-search" class="screen">
+        <div class="container">
+          <form id="searchForm" onsubmit="event.preventDefault(); search();">
+            <label for="searchInput">Search Previous Cases</label>
+            <textarea id="searchInput" placeholder="E.g., I often feel overwhelmed and worthless, and..." required></textarea>
+            <button type="submit">Search Cases</button>
+          </form>
+          <p id="searchLoading" class="loading" style="display: none;">Searching for similar cases...</p>
+          <div id="searchResultsBox" class="response-box" style="display: none;">
+            <div id="results"></div>
+            <button id="copySearchBtn" class="copy-btn">Make a Copy</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>&copy; 2025 Mental Health Web App</p>
+    </footer>
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+
+</html>
